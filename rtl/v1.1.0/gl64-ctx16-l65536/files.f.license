@@ -1,0 +1,15 @@
+OpenRTL-Header-Begin
+OpenRTL — Open-source hardware accelerators.
+Organization: https://github.com/OpenRTL-Lab
+Website: https://openrtl.top/
+
+Project: Goldilocks Batch Inversion Hardware Accelerator
+Chisel hardware for Goldilocks batch inversion and division with interleaved contexts.
+Repository: https://github.com/OpenRTL-Lab/batch-inversion-goldilocks
+File: rtl/v1.1.0/gl64-ctx16-l65536/files.f
+
+SPDX-FileCopyrightText: 2026 Goldilocks Batch Inversion contributors
+Copyright applies to original project contributions only.
+SPDX-License-Identifier: MIT
+See LICENSE and applicable third-party notices.
+OpenRTL-Header-End

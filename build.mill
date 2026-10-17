@@ -1,0 +1,40 @@
+//| mill-version: 1.1.7
+//| mill-jvm-version: system
+/*
+ * OpenRTL-Header-Begin
+ * OpenRTL — Open-source hardware accelerators.
+ * Organization: https://github.com/OpenRTL-Lab
+ * Website: https://openrtl.top/
+ *
+ * Project: Goldilocks Batch Inversion Hardware Accelerator
+ * Chisel hardware for Goldilocks batch inversion and division with interleaved contexts.
+ * Repository: https://github.com/OpenRTL-Lab/batch-inversion-goldilocks
+ * File: build.mill
+ *
+ * SPDX-FileCopyrightText: 2026 Goldilocks Batch Inversion contributors
+ * Copyright applies to original project contributions only.
+ * SPDX-License-Identifier: MIT
+ * See LICENSE and applicable third-party notices.
+ * OpenRTL-Header-End
+ */
+
+package build
+import mill._
+import mill.scalalib._
+
+object batchInversion extends SbtModule {
+  def scalaVersion = "2.13.18"
+  def chiselVersion = "7.13.0"
+  def repoDir = super.moduleDir / os.up
+  def moduleDir = repoDir / "operators" / "batch-inversion"
+  override def sources = Task.Sources(moduleDir / "src" / "main" / "scala")
+  override def scalacOptions = Seq("-language:reflectiveCalls", "-deprecation", "-feature", "-Xcheckinit")
+  override def mvnDeps = Seq(mvn"org.chipsalliance::chisel:$chiselVersion")
+  override def scalacPluginMvnDeps = Seq(mvn"org.chipsalliance:::chisel-plugin:$chiselVersion")
+  object tool extends ScalaModule {
+    def scalaVersion = batchInversion.scalaVersion
+    def moduleDir = batchInversion.moduleDir
+    override def sources = Task.Sources(moduleDir / "src" / "tool" / "scala")
+    def moduleDeps = Seq(batchInversion)
+  }
+}
